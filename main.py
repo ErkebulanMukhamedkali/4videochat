@@ -32,11 +32,10 @@ async def join_room(sid: str, room_id, user_id):
     print(sid + " joined room " + room_id)
     await sio.emit('user-joined', data=user_id, room=room_id, skip_sid=sid)
 
-
-@sio.event
-async def disconnect(sid: str, *args):
-    print(sid + " disconnected")
-    print(args)
-    await sio.emit('user-disconnected', data=sid, skip_sid=sid)
+    @sio.on('disconnect')
+    async def disconnect(sid: str):
+        sio.leave_room(sid, room_id)
+        print(sid + " disconnected")
+        await sio.emit('user-disconnected', data=user_id, room=room_id, skip_sid=sid)
 
 app.mount("/", socketio.ASGIApp(sio))

@@ -28,12 +28,13 @@ navigator.mediaDevices.getUserMedia({
     });
 
     socket.on('user-joined', userId => {
+        console.log(userId + " joined the room");
         connectNewUser(userId, stream);
     });
 });
 
 socket.on('user-disconnected', userId => {
-    console.log(userId);
+    console.log(userId + " disconnected");
     if (peers[userId]) peers[userId].close();
 });
 
