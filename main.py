@@ -35,7 +35,7 @@ async def join_room(sid: str, room_id, user_id):
     @sio.on('disconnect')
     async def disconnect(sid: str):
         sio.leave_room(sid, room_id)
-        print(sid + " disconnected")
+        print(sid + " left room " + room_id)
         await sio.emit('user-disconnected', data=user_id, room=room_id, skip_sid=sid)
 
 app.mount("/", socketio.ASGIApp(sio))
