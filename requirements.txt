@@ -4,7 +4,7 @@ uvicorn==0.11.7
 
 # Templating and static files serving
 aiofiles==0.5.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 
 # Some socket.io shit
 python-socketio==4.6.0
